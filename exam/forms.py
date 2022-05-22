@@ -23,7 +23,7 @@ class QuestionForm(forms.ModelForm):
 
     class Meta:
         model = models.Question
-        fields = ['marks', 'question', 'code']
+        fields = ['marks', 'question']
         widgets = {
             'question': forms.Textarea(attrs={'rows': 3,  'cols': 50})
         }
