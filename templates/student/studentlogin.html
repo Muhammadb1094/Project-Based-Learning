@@ -82,15 +82,23 @@
     <div class="container">
     <div class="row">
         <div class="col-md-6">
+
             <div class="card">
                 <form class="box" method="post">
+
+
                     {% csrf_token %}
-                    <h1>Student Login Panel</h1>
 
-                     {% render_field form.username class="form-control" autocomplete="off" placeholder="Username" %}
-                     {% render_field form.password class="form-control" autocomplete="off" placeholder="Password" %}
+                    <h1><img src="https://video.flhe3-2.fna.fbcdn.net/v/t39.30808-1/235980861_10159110493998930_7319609513909954651_n.jpg?stp=dst-jpg_p148x148&_nc_cat=104&ccb=1-7&_nc_sid=1eb0c7&_nc_eui2=AeHiEXjWGSoCmUdwFuH6q-rj9JexrmIDbOT0l7GuYgNs5KhLkovNXItzxUeX055VyBj6hlvoJhAt1RimcAGkYKO6&_nc_ohc=bw-xWeo-N-EAX9n-88_&_nc_ht=video.flhe3-2.fna&oh=00_AT8UfBVltK7UA3L-RYgZrPyfmh5AYlyvrd62AAAKSpUTOw&oe=629DB716"
+                     style="border-radius: 50%;" height="80">
+                        Student Login
+                    </h1>
 
-                     <input type="submit" name="" value="Login">
+                     {% render_field form.username style="border-radius:15px;" class="form-control" autocomplete="off" placeholder="Username" %}
+                     {% render_field form.password style="border-radius:15px;" class="form-control" autocomplete="off" placeholder="Password" %}
+
+
+                         <input class="btn btn-outline-primary" value="Login" type="submit">
 
                 </form>
             </div>
@@ -100,6 +108,6 @@
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br>
-{% include "exam/footer.html" %}
+
   </body>
 </html>
