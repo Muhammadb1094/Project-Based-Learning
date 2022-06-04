@@ -17,7 +17,7 @@ class Question(models.Model):
     question = models.TextField()
 
     def __str__(self):
-        return f'{self.question[10:10]}'
+        return f'{self.question}'
 
 
 class Result(models.Model):

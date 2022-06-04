@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from . import forms,models
+from django.urls import reverse
 import sys
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
@@ -126,32 +127,27 @@ def student_marks_view(request):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def runcode(request):
-
     if request.method == "POST":
         codeareadata = request.POST['codearea']
+        course_id = request.POST['course_id']
 
         try:
-            #save original standart output reference
 
             original_stdout = sys.stdout
-            sys.stdout = open('file.txt', 'w') #change the standard output to the file we created
+            sys.stdout = open('file.txt', 'w')
 
-            #execute code
-
-            exec(codeareadata)  #example =>   print("hello world")
-
+            exec(codeareadata)
             sys.stdout.close()
-
-            sys.stdout = original_stdout  #reset the standard output to its original value
-
-            # finally read output from file and save in output variable
+            sys.stdout = original_stdout
 
             output = open('file.txt', 'r').read()
 
         except Exception as e:
-            # to return error in the code
             sys.stdout = original_stdout
             output = e
 
-    return render(request, 'index.html', {"code": codeareadata, "output": output})
+        course = QMODEL.Course.objects.get(id=course_id)
+        questions = QMODEL.Question.objects.all().filter(course=course)
 
+        context = {"code": codeareadata, "output": output, 'course': course, 'questions': questions}
+        return render(request, 'student/start_exam.html', context=context)

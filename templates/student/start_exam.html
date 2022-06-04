@@ -10,50 +10,29 @@
 
 </head>
 
-
+<h2 style="text-align: center; text-transform:capitalize;">Course Name: {{course.course_name}}</h2>
+<br>
 <div class="jumbotron my-4">
 
-  <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
+  <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="{% url 'runcode' %}" method="POST">
     {% csrf_token %}
-    <h2 style="text-align: center; text-transform:capitalize;">Course: {{course.course_name}}</h2>
+
     {% for q in questions%}
-    <h3 class="text-danger">{{ forloop.counter }}. {{q.question}}</h3><h4 style="text-align: right;">[{{q.marks}} Marks]</h4>
-    
+      <input value="{{course.id}}" name="course_id" hidden>
+    <h3 class="text-dark">{{ forloop.counter }}. {{q.question}}</h3><h4 style="text-align: right;">[{{q.marks}} Marks]</h4>
+
         <input type="hidden" name="csrfmiddlewaretoken" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
-        
-        
-        <textarea class="form-control" name="code" style="min-height:400px;">
 
-        </textarea>
 
+        <textarea class="form-control" name="codearea" style="min-height:400px;">{{code}}</textarea>
         {% endfor %}
     <br>
         <input class="btn btn-success btn-lg" style="border-radius: 0%;"  type="submit" value="Submit Code">
     </form>
+
+    {% if output %}
+        <h3 class="p-3">Code Output:</h3>
+        <textarea readonly class="form-control p-3" style="min-height:200px;">{{output}}</textarea>
+    {% endif %}
   </div>
-
-<script> 
-    function saveAns(){  
-
-        var ele = document.getElementsByTagName('input'); 
-        for(i = 0; i < ele.length; i++) { 
-            if(ele[i].type="radio") { 
-                if(ele[i].checked){        
-                  setCookie(ele[i].name,ele[i].value,3)
-                }
-            } 
-        } 
-          
-    }
-    
-    function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-</script> 
-
-<br><br><br><br><br><br>
 {% endblock content %}
