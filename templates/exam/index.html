@@ -6,6 +6,15 @@
   .jumbotron{
     margin-bottom: 0px;
   }
+  .blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
 </style>
 <body>
   {% include "exam/navbar.html" %}
@@ -15,14 +24,16 @@
     <div class="container text-center">
     <h2 class="display-3 text-info">Project Based Learning System</h2>
 
-    <marquee width="60%" direction="left" height="100px">
-      <p class="display-4 d-none d-sm-block">Improve your skills by attending your exams!</p>
-    </marquee>
+    <div width="60%" direction="left" height="100px">
+      <h4 class="d-none d-sm-block blink_me">Improve your skills by Practice Problems!</h4>
+    </p>
 
   
     <p><strong> Start Your Skills Journey By Signing Up</strong></p>
-    <a href="/student/studentsignup" class="btn btn-lg btn-info" style="padding-right: 35px; border-radius: 0%;"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Sign Up as Student</a>
-  </div>  
+    <a href="/student/studentsignup" class="btn btn-lg btn-info" style="padding-right: 35px; border-radius: 0%;"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Signup as Student</a>
+    <a href="/student/studentlogin" class="btn btn-lg btn-info" style="padding-right: 35px; border-radius: 0%;"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Signin as Student</a>
+  </div>
+</div>
 </div>
 
 </body>

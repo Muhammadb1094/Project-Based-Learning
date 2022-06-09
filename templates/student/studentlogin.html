@@ -26,6 +26,8 @@
     text-align: center;
     transition: 0.25s;
     margin-top: 100px
+
+
 }
 
 .box input[type="text"],
@@ -41,7 +43,8 @@
     outline: none;
     color: white;
     border-radius: 0px;
-    transition: 0.25s
+    transition: 0.25s;
+
 }
 
 .box h1 {
@@ -89,17 +92,22 @@
 
                     {% csrf_token %}
 
-                    <h1><img src="https://video.flhe3-2.fna.fbcdn.net/v/t39.30808-1/235980861_10159110493998930_7319609513909954651_n.jpg?stp=dst-jpg_p148x148&_nc_cat=104&ccb=1-7&_nc_sid=1eb0c7&_nc_eui2=AeHiEXjWGSoCmUdwFuH6q-rj9JexrmIDbOT0l7GuYgNs5KhLkovNXItzxUeX055VyBj6hlvoJhAt1RimcAGkYKO6&_nc_ohc=bw-xWeo-N-EAX9n-88_&_nc_ht=video.flhe3-2.fna&oh=00_AT8UfBVltK7UA3L-RYgZrPyfmh5AYlyvrd62AAAKSpUTOw&oe=629DB716"
-                     style="border-radius: 50%;" height="80">
+                    <h1 style="font-family:Serif;" class="mt-2">
+                        <img src="https://www.superior.edu.pk/wp-content/uploads/2021/11/superior-university-logo-header-mobile.png"
+                             style="border-radius: 50%;" height="80">
                         Student Login
                     </h1>
+
 
                      {% render_field form.username style="border-radius:15px;" class="form-control" autocomplete="off" placeholder="Username" %}
                      {% render_field form.password style="border-radius:15px;" class="form-control" autocomplete="off" placeholder="Password" %}
 
 
-                         <input class="btn btn-outline-primary" value="Login" type="submit">
+                    <button class="btn btn-success rounded text-white"  type="submit">Login</button>
 
+                <hr>
+                    <a href="{% url 'studentsignup' %}" class="btn btn-success rounded" style="border-radius: 0%;">Sign Up</a>
+                </hr>
                 </form>
             </div>
         </div>
