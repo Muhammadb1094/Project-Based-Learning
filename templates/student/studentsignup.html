@@ -16,16 +16,16 @@
 }
 
 .box {
-    width: 100vh;
+    width: 110vh;
     padding: 40px;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 35%;
     background: #212529;
     border-radius: 15px;
     color: white;
     transition: 0.25s;
-    margin-top: 20px
+    margin-top: 20px;
 }
 
 .box input[type="text"],
@@ -86,7 +86,7 @@
   <body>
     {% include "exam/navbar.html" %}
 
-     <div class="container">
+     <div class="container" style="border-bottom: 50px !important">
 
     <div class="row">
         <div class="col-md-6">
@@ -96,7 +96,7 @@
 
                     {% csrf_token %}
 
-                            <h1  class=" border-bottom py-2 text-center">
+                            <h1  class=" border-bottom py-2 text-center" style="font-family:Serif;">
                                 <img src="https://www.superior.edu.pk/wp-content/uploads/2021/11/superior-university-logo-header-mobile.png"
                                 height="75" width="75">
                             Student Signup
@@ -144,69 +144,18 @@
                       </div>
 
 
-    <button type="submit" class="btn btn-outline-success" style="border-radius: 0%;">Signup</button>
+                    <button type="submit" class="btn btn-outline-success" style="border-radius: 0%;">Signup</button>
 
-    <a href="{% url 'studentlogin' %}" class="text-center btn btn-outline-success" style="border-radius: 0%;">Login</a>
 
+                    <span class="text-white">
+                       Already have account?
+                   </span>
+                    <a href="{% url 'studentlogin' %}" class="text-white" style="border-radius:0%;">Login</a>
                 </form>
             </div>
         </div>
     </div>
      </div>
-
-<!--   <div class="container">-->
-<!--  <h1 style="text-align: center;">Student Signup Form</h1>-->
-<!--  <form method="POST" autocomplete="off" enctype="multipart/form-data">-->
-<!--    {% csrf_token %}-->
-
-<!--    <div class="form-row">-->
-<!--        <div class="form-group col-md-6">-->
-<!--          <label for="first_name">First Name</label>-->
-<!--          {% render_field userForm.first_name|attr:'required:true'  class="form-control" placeholder="First Name" %}-->
-<!--        </div>-->
-<!--        <div class="form-group col-md-6">-->
-<!--          <label for="last_name">Last Name</label>-->
-<!--          {% render_field userForm.last_name|attr:'required:true'  class="form-control" placeholder="Last Name" %}-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="form-row">-->
-<!--        <div class="form-group col-md-6">-->
-<!--          <label for="mobile">Contact</label>-->
-<!--          {% render_field studentForm.mobile|attr:'required:true'  class="form-control" placeholder="Contact Number" %}-->
-<!--        </div>-->
-<!--        <div class="form-group col-md-6">-->
-<!--          <label for="address">Address</label>-->
-<!--          {% render_field studentForm.address|attr:'required:true'  class="form-control" placeholder="Address" %}-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="form-row">-->
-<!--        <div class="form-group col-md-6">-->
-<!--          <label for="username">Username</label>-->
-<!--          {% render_field userForm.username|attr:'required:true'  class="form-control" placeholder="username" %}-->
-<!--        </div>-->
-<!--        <div class="form-group col-md-6">-->
-<!--          <label for="inputPassword4">Password</label>-->
-<!--          {% render_field userForm.password|attr:'required:true'  class="form-control" placeholder="password" %}-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="form-row">-->
-<!--        <div class="form-group col-md-12">-->
-<!--          <label for="profile_pic">Profile Picture</label>-->
-<!--          {% render_field studentForm.profile_pic|attr:'required:true' class="form-control" placeholder="" %}-->
-<!--        </div>-->
-
-<!--      </div>-->
-
-
-<!--    <button type="submit" class="btn btn-success" style="border-radius: 0%;">Sign Up</button>-->
-
-<!--    <a href="{% url 'studentlogin' %}" class="btn btn-success" style="border-radius: 0%;">Login</a>-->
-<!--  </form>-->
-<!--</div>-->
-
 
   </body>
 </html>
