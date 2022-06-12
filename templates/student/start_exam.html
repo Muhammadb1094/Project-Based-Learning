@@ -17,12 +17,11 @@
   <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="{% url 'runcode' %}" method="POST">
     {% csrf_token %}
 
-    {% for q in questions%}
-      <input value="{{course.id}}" name="course_id" hidden>
-    <h3 class="text-dark">{{ forloop.counter }}. {{q.question}}</h3><h4 style="text-align: right;">[{{q.marks}} Marks]</h4>
+    {% for q in questions %}
+        <input value="{{course.id}}" name="course_id" hidden>
+        <h3 class="text-dark">{{ forloop.counter }}. {{q.question}}</h3><h4 style="text-align: right;">[{{q.marks}} Marks]</h4>
 
         <input type="hidden" name="csrfmiddlewaretoken" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
-
 
         <textarea class="form-control" name="codearea" style="min-height:400px;">{{code}}</textarea>
         {% endfor %}
@@ -32,7 +31,13 @@
 
     {% if output %}
         <h3 class="p-3">Code Output:</h3>
-        <textarea readonly class="form-control p-3" style="min-height:200px;">{{output}}</textarea>
+        <form class="form text-center" autocomplete="off" action="{% url 'save' %}" method="POST">
+            <textarea readonly name="output" class="form-control p-3" style="min-height:200px;">{{output}}</textarea>
+            <input hidden value="{{ course.id }}"  name="course_id" />
+            <input type="submit" value="Save Output" class="btn btn-success">
+        </form>
+
+
     {% endif %}
   </div>
 {% endblock content %}

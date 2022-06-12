@@ -1,13 +1,8 @@
-from django.shortcuts import render, redirect, reverse
-from . import forms, models
-from django.db.models import Sum
+from django.shortcuts import render, redirect
+from . import forms
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.mail import send_mail
-from student import models as SMODEL
-from student import forms as SFORM
-from django.contrib.auth.models import User
 
 
 def home_view(request):
@@ -179,7 +174,7 @@ def contactus_view(request):
             email = sub.cleaned_data['Email']
             name = sub.cleaned_data['Name']
             message = sub.cleaned_data['Message']
-            send_mail(str(name)+' || '+str(email),message,settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
+            send_mail(str(name)+' || '+str(email), message, settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER,fail_silently=False)
             return render(request, 'exam/contactussuccess.html')
     return render(request, 'exam/contactus.html', {'form': sub})
 
