@@ -16,9 +16,6 @@ def home_view(request):
     return render(request, 'exam/index.html')
 
 
-
-
-
 def is_student(user):
     return user.groups.filter(name='STUDENT').exists()
 
@@ -34,232 +31,140 @@ def adminclick_view(request):
 
 
 # @login_required(login_url='adminlogin')
-# def admin_dashboard_view(request):
+# def admin_student_view(request):
 #     dictionary = {
 #         'total_student': SMODEL.Student.objects.all().count(),
-#         'total_teacher': TMODEL.Teacher.objects.all().filter(status=True).count(),
-#         'total_course': models.Course.objects.all().count(),
-#         'total_question': models.Question.objects.all().count(),
 #     }
-#     return render(request, 'exam/admin_dashboard.html', context=dictionary)
-
-
+#     return render(request, 'exam/admin_student.html', context=dictionary)
+#
+#
 # @login_required(login_url='adminlogin')
-# def admin_teacher_view(request):
-#     dictionary = {
-#         'total_teacher': TMODEL.Teacher.objects.all().filter(status=True).count(),
-#         'pending_teacher': TMODEL.Teacher.objects.all().filter(status=False).count(),
-#         'salary': TMODEL.Teacher.objects.all().filter(status=True).aggregate(Sum('salary'))['salary__sum'],
-#     }
-#     return render(request, 'exam/admin_teacher.html', context=dictionary)
-
-
+# def admin_view_student_view(request):
+#     students = SMODEL.Student.objects.all()
+#     return render(request, 'exam/admin_view_student.html', {'students': students})
+#
+#
 # @login_required(login_url='adminlogin')
-# def admin_view_teacher_view(request):
-#     teachers = TMODEL.Teacher.objects.all().filter(status=True)
-#     return render(request, 'exam/admin_view_teacher.html', {'teachers': teachers})
-
-
-# @login_required(login_url='adminlogin')
-# def update_teacher_view(request, pk):
-#     teacher = TMODEL.Teacher.objects.get(id=pk)
-#     user = TMODEL.User.objects.get(id=teacher.user_id)
-#     userForm = TFORM.TeacherUserForm(instance=user)
-#     teacherForm = TFORM.TeacherForm(request.FILES, instance=teacher)
-#     mydict = {'userForm': userForm, 'teacherForm': teacherForm}
+# def update_student_view(request,pk):
+#     student = SMODEL.Student.objects.get(id=pk)
+#     user = SMODEL.User.objects.get(id=student.user_id)
+#     userForm = SFORM.StudentUserForm(instance=user)
+#     studentForm = SFORM.StudentForm(request.FILES, instance=student)
+#     mydict = {'userForm': userForm, 'studentForm': studentForm}
 #     if request.method == 'POST':
-#         userForm = TFORM.TeacherUserForm(request.POST, instance=user)
-#         teacherForm = TFORM.TeacherForm(request.POST, request.FILES, instance=teacher)
-#         if userForm.is_valid() and teacherForm.is_valid():
+#         userForm = SFORM.StudentUserForm(request.POST, instance=user)
+#         studentForm = SFORM.StudentForm(request.POST, request.FILES, instance=student)
+#         if userForm.is_valid() and studentForm.is_valid():
 #             user = userForm.save()
 #             user.set_password(user.password)
 #             user.save()
-#             teacherForm.save()
-#             return redirect('admin-view-teacher')
-#     return render(request, 'exam/update_teacher.html', context=mydict)
-
-
+#             studentForm.save()
+#             return redirect('admin-view-student')
+#     return render(request, 'exam/update_student.html', context=mydict)
+#
+#
 # @login_required(login_url='adminlogin')
-# def delete_teacher_view(request, pk):
-#     teacher = TMODEL.Teacher.objects.get(id=pk)
-#     user = User.objects.get(id=teacher.user_id)
+# def delete_student_view(request, pk):
+#     student = SMODEL.Student.objects.get(id=pk)
+#     user = User.objects.get(id=student.user_id)
 #     user.delete()
-#     teacher.delete()
-#     return HttpResponseRedirect('/admin-view-teacher')
-
-
+#     student.delete()
+#     return HttpResponseRedirect('/admin-view-student')
+#
+#
 # @login_required(login_url='adminlogin')
-# def admin_view_pending_teacher_view(request):
-#     teachers = TMODEL.Teacher.objects.all().filter(status=False)
-#     return render(request, 'exam/admin_view_pending_teacher.html', {'teachers': teachers})
-
-
+# def admin_course_view(request):
+#     return render(request, 'exam/admin_course.html')
+#
+#
 # @login_required(login_url='adminlogin')
-# def approve_teacher_view(request, pk):
-#     teacherSalary = forms.TeacherSalaryForm()
+# def admin_add_course_view(request):
+#     courseForm = forms.CourseForm()
 #     if request.method == 'POST':
-#         teacherSalary = forms.TeacherSalaryForm(request.POST)
-#         if teacherSalary.is_valid():
-#             teacher = TMODEL.Teacher.objects.get(id=pk)
-#             teacher.salary = teacherSalary.cleaned_data['salary']
-#             teacher.status = True
-#             teacher.save()
+#         courseForm = forms.CourseForm(request.POST)
+#         if courseForm.is_valid():
+#             courseForm.save()
 #         else:
 #             print("form is invalid")
-#         return HttpResponseRedirect('/admin-view-pending-teacher')
-#     return render(request, 'exam/salary_form.html', {'teacherSalary': teacherSalary})
+#         return HttpResponseRedirect('/admin-view-course')
+#     return render(request, 'exam/admin_add_course.html', {'courseForm': courseForm})
 #
 #
 # @login_required(login_url='adminlogin')
-# def reject_teacher_view(request, pk):
-#     teacher = TMODEL.Teacher.objects.get(id=pk)
-#     user = User.objects.get(id=teacher.user_id)
-#     user.delete()
-#     teacher.delete()
-#     return HttpResponseRedirect('/admin-view-pending-teacher')
-
-
+# def admin_view_course_view(request):
+#     courses = models.Course.objects.all()
+#     return render(request, 'exam/admin_view_course.html', {'courses': courses})
+#
+#
 # @login_required(login_url='adminlogin')
-# def admin_view_teacher_salary_view(request):
-#     teachers = TMODEL.Teacher.objects.all().filter(status=True)
-#     return render(request, 'exam/admin_view_teacher_salary.html', {'teachers': teachers})
-
-
-@login_required(login_url='adminlogin')
-def admin_student_view(request):
-    dictionary = {
-        'total_student': SMODEL.Student.objects.all().count(),
-    }
-    return render(request, 'exam/admin_student.html', context=dictionary)
-
-
-@login_required(login_url='adminlogin')
-def admin_view_student_view(request):
-    students = SMODEL.Student.objects.all()
-    return render(request, 'exam/admin_view_student.html', {'students': students})
-
-
-@login_required(login_url='adminlogin')
-def update_student_view(request,pk):
-    student = SMODEL.Student.objects.get(id=pk)
-    user = SMODEL.User.objects.get(id=student.user_id)
-    userForm = SFORM.StudentUserForm(instance=user)
-    studentForm = SFORM.StudentForm(request.FILES, instance=student)
-    mydict = {'userForm': userForm, 'studentForm': studentForm}
-    if request.method == 'POST':
-        userForm = SFORM.StudentUserForm(request.POST, instance=user)
-        studentForm = SFORM.StudentForm(request.POST, request.FILES, instance=student)
-        if userForm.is_valid() and studentForm.is_valid():
-            user = userForm.save()
-            user.set_password(user.password)
-            user.save()
-            studentForm.save()
-            return redirect('admin-view-student')
-    return render(request, 'exam/update_student.html', context=mydict)
-
-
-@login_required(login_url='adminlogin')
-def delete_student_view(request, pk):
-    student = SMODEL.Student.objects.get(id=pk)
-    user = User.objects.get(id=student.user_id)
-    user.delete()
-    student.delete()
-    return HttpResponseRedirect('/admin-view-student')
-
-
-@login_required(login_url='adminlogin')
-def admin_course_view(request):
-    return render(request, 'exam/admin_course.html')
-
-
-@login_required(login_url='adminlogin')
-def admin_add_course_view(request):
-    courseForm = forms.CourseForm()
-    if request.method == 'POST':
-        courseForm = forms.CourseForm(request.POST)
-        if courseForm.is_valid():        
-            courseForm.save()
-        else:
-            print("form is invalid")
-        return HttpResponseRedirect('/admin-view-course')
-    return render(request, 'exam/admin_add_course.html', {'courseForm': courseForm})
-
-
-@login_required(login_url='adminlogin')
-def admin_view_course_view(request):
-    courses = models.Course.objects.all()
-    return render(request, 'exam/admin_view_course.html', {'courses': courses})
-
-
-@login_required(login_url='adminlogin')
-def delete_course_view(request, pk):
-    course = models.Course.objects.get(id=pk)
-    course.delete()
-    return HttpResponseRedirect('/admin-view-course')
-
-
-@login_required(login_url='adminlogin')
-def admin_question_view(request):
-    return render(request, 'exam/admin_question.html')
-
-
-@login_required(login_url='adminlogin')
-def admin_add_question_view(request):
-    questionForm = forms.QuestionForm()
-    if request.method == 'POST':
-        questionForm = forms.QuestionForm(request.POST)
-        if questionForm.is_valid():
-            question = questionForm.save(commit=False)
-            course = models.Course.objects.get(id=request.POST.get('courseID'))
-            question.course = course
-            question.save()       
-        else:
-            print("form is invalid")
-        return HttpResponseRedirect('/admin-view-question')
-    return render(request, 'exam/admin_add_question.html', {'questionForm': questionForm})
-
-
-@login_required(login_url='adminlogin')
-def admin_view_question_view(request):
-    courses = models.Course.objects.all()
-    return render(request, 'exam/admin_view_question.html', {'courses': courses})
-
-
-@login_required(login_url='adminlogin')
-def view_question_view(request, pk):
-    questions = models.Question.objects.all().filter(course_id=pk)
-    return render(request, 'exam/view_question.html', {'questions': questions})
-
-
-@login_required(login_url='adminlogin')
-def delete_question_view(request, pk):
-    question = models.Question.objects.get(id=pk)
-    question.delete()
-    return HttpResponseRedirect('/admin-view-question')
-
-
-@login_required(login_url='adminlogin')
-def admin_view_student_marks_view(request):
-    students = SMODEL.Student.objects.all()
-    return render(request, 'exam/admin_view_student_marks.html', {'students': students})
-
-
-@login_required(login_url='adminlogin')
-def admin_view_marks_view(request, pk):
-    courses = models.Course.objects.all()
-    response = render(request, 'exam/admin_view_marks.html', {'courses': courses})
-    response.set_cookie('student_id', str(pk))
-    return response
-
-
-@login_required(login_url='adminlogin')
-def admin_check_marks_view(request,pk):
-    course = models.Course.objects.get(id=pk)
-    student_id = request.COOKIES.get('student_id')
-    student= SMODEL.Student.objects.get(id=student_id)
-
-    results= models.Result.objects.all().filter(exam=course).filter(student=student)
-    return render(request,'exam/admin_check_marks.html',{'results':results})
+# def delete_course_view(request, pk):
+#     course = models.Course.objects.get(id=pk)
+#     course.delete()
+#     return HttpResponseRedirect('/admin-view-course')
+#
+#
+# @login_required(login_url='adminlogin')
+# def admin_question_view(request):
+#     return render(request, 'exam/admin_question.html')
+#
+#
+# @login_required(login_url='adminlogin')
+# def admin_add_question_view(request):
+#     questionForm = forms.QuestionForm()
+#     if request.method == 'POST':
+#         questionForm = forms.QuestionForm(request.POST)
+#         if questionForm.is_valid():
+#             question = questionForm.save(commit=False)
+#             course = models.Course.objects.get(id=request.POST.get('courseID'))
+#             question.course = course
+#             question.save()
+#         else:
+#             print("form is invalid")
+#         return HttpResponseRedirect('/admin-view-question')
+#     return render(request, 'exam/admin_add_question.html', {'questionForm': questionForm})
+#
+#
+# @login_required(login_url='adminlogin')
+# def admin_view_question_view(request):
+#     courses = models.Course.objects.all()
+#     return render(request, 'exam/admin_view_question.html', {'courses': courses})
+#
+#
+# @login_required(login_url='adminlogin')
+# def view_question_view(request, pk):
+#     questions = models.Question.objects.all().filter(course_id=pk)
+#     return render(request, 'exam/view_question.html', {'questions': questions})
+#
+#
+# @login_required(login_url='adminlogin')
+# def delete_question_view(request, pk):
+#     question = models.Question.objects.get(id=pk)
+#     question.delete()
+#     return HttpResponseRedirect('/admin-view-question')
+#
+#
+# @login_required(login_url='adminlogin')
+# def admin_view_student_marks_view(request):
+#     students = SMODEL.Student.objects.all()
+#     return render(request, 'exam/admin_view_student_marks.html', {'students': students})
+#
+#
+# @login_required(login_url='adminlogin')
+# def admin_view_marks_view(request, pk):
+#     courses = models.Course.objects.all()
+#     response = render(request, 'exam/admin_view_marks.html', {'courses': courses})
+#     response.set_cookie('student_id', str(pk))
+#     return response
+#
+#
+# @login_required(login_url='adminlogin')
+# def admin_check_marks_view(request,pk):
+#     course = models.Course.objects.get(id=pk)
+#     student_id = request.COOKIES.get('student_id')
+#     student= SMODEL.Student.objects.get(id=student_id)
+#
+#     results= models.Result.objects.all().filter(exam=course).filter(student=student)
+#     return render(request,'exam/admin_check_marks.html',{'results':results})
 
 
 def aboutus_view(request):

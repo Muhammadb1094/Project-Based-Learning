@@ -14,6 +14,7 @@ def studentclick_view(request):
         return HttpResponseRedirect('afterlogin')
     return render(request, 'student/studentclick.html')
 
+
 def student_signup_view(request):
     userForm=forms.StudentUserForm()
     studentForm=forms.StudentForm()
@@ -33,8 +34,10 @@ def student_signup_view(request):
         return HttpResponseRedirect('studentlogin')
     return render(request,'student/studentsignup.html',context=mydict)
 
+
 def is_student(user):
     return user.groups.filter(name='STUDENT').exists()
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
@@ -46,11 +49,13 @@ def student_dashboard_view(request):
     }
     return render(request,'student/student_dashboard.html',context=dict)
 
+
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_exam_view(request):
     courses=QMODEL.Course.objects.all()
     return render(request,'student/student_exam.html',{'courses':courses})
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
@@ -63,6 +68,7 @@ def take_exam_view(request,pk):
         total_marks=total_marks + q.marks
     
     return render(request,'student/take_exam.html',{'course':course,'total_questions':total_questions,'total_marks':total_marks})
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
@@ -99,7 +105,6 @@ def calculate_marks_view(request):
         result.save()
 
         return HttpResponseRedirect('view-result')
-
 
 
 @login_required(login_url='studentlogin')
