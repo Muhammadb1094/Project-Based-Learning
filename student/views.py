@@ -117,6 +117,7 @@ def check_marks_view(request,pk):
     results= QMODEL.Result.objects.all().filter(exam=course).filter(student=student)
     return render(request,'student/check_marks.html',{'results':results})
 
+
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_marks_view(request):
@@ -151,3 +152,4 @@ def runcode(request):
 
         context = {"code": codeareadata, "output": output, 'course': course, 'questions': questions}
         return render(request, 'student/start_exam.html', context=context)
+

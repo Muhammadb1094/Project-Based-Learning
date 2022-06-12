@@ -6,7 +6,7 @@
     <title>SignUp</title>
     <style media="screen">
       body {
-    margin: 0;
+    margin: 0px;
     padding: 0;
     font-family: sans-serif;
     background: #304352;  /* fallback for old browsers */
@@ -18,14 +18,23 @@
 .box {
     width: 110vh;
     padding: 40px;
-    position: absolute;
     top: 50%;
-    left: 35%;
     background: #212529;
     border-radius: 15px;
     color: white;
     transition: 0.25s;
-    margin-top: 20px;
+
+}
+.box1 {
+    width: 110vh;
+    padding: 40px;
+    top: 50%;
+    background: #8c2586;
+    opacity: 5;
+    border-radius: 15px;
+    color: white;
+    transition: 0.25s;
+
 }
 
 .box input[type="text"],
@@ -86,12 +95,10 @@
   <body>
     {% include "exam/navbar.html" %}
 
-     <div class="container" style="border-bottom: 50px !important">
+     <div class="container">
 
-    <div class="row">
-        <div class="col-md-6">
-
-            <div class="card">
+    <div class="row justify-content-center">
+            <div class="box1">
                 <form class="box" method="post">
 
                     {% csrf_token %}
@@ -138,22 +145,25 @@
                         <div class="form-row">
                         <div class="form-group col-md-12">
                           <label for="profile_pic">Profile Picture</label>
-                          {% render_field studentForm.profile_pic|attr:'required:true' class="form-control" placeholder="" %}
+                          {% render_field studentForm.profile_pic|attr:'required:true' class="form-control p-1" placeholder="" %}
                         </div>
 
                       </div>
 
 
-                    <button type="submit" class="btn btn-outline-success" style="border-radius: 0%;">Signup</button>
+                    <div class="container text-center">
+                        <button type="submit" class="btn btn-outline-success rounded" style="border-radius: 0%;">Signup</button>
+                    </div>
 
-
-                    <span class="text-white">
-                       Already have account?
-                   </span>
-                    <a href="{% url 'studentlogin' %}" class="text-white" style="border-radius:0%;">Login</a>
+                    <div class="container text-center">
+                        <hr>
+                        <span class="text-white">
+                            Already have account?
+                        </span>
+                        <a href="{% url 'studentlogin' %}" class="text-white" style="border-radius:0%;">Login</a>
+                    </div>
                 </form>
             </div>
-        </div>
     </div>
      </div>
 
