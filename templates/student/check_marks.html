@@ -39,11 +39,12 @@
       </thead>
       {% for t in results %}
       <tr>
-
+      {% if t.marks != 0 %}
         <td> {{t.exam}}</td>
         <td> {{t.marks}}</td>
         <td>Attempt {{ forloop.counter }}</td>
         <td> {{t.date}}</td>
+      {% endif %}
         
         
       </tr>

@@ -24,6 +24,6 @@ class Result(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     exam = models.ForeignKey(Course, on_delete=models.CASCADE)
     marks = models.PositiveIntegerField()
-    code = models.TextField(null=True, blank=True)
+    code = models.TextField('Output Result', null=True, blank=True)
     date = models.DateTimeField(auto_now=True)
 
