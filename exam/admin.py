@@ -11,4 +11,9 @@ class AdminResult(admin.ModelAdmin):
 
 admin.site.register(models.Result, AdminResult)
 
-admin.site.register(models.Question)
+
+class AdminQuestion(admin.ModelAdmin):
+    list_display = ['course', 'question', 'marks']
+
+
+admin.site.register(models.Question, AdminQuestion)
