@@ -131,15 +131,15 @@ STATICFILES_DIRS=[
 STATIC_DIR,
  ]
 
-LOGIN_REDIRECT_URL='/afterlogin'
+LOGIN_REDIRECT_URL = '/afterlogin'
 
-#for contact us give your gmail id and password
-EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'from@gmail.com' # this email will be used to send emails
-EMAIL_HOST_PASSWORD = 'ENTER_PASSWORD' # host email password required
+EMAIL_HOST_USER = "bcsm-f18-221@superior.edu.pk"
+EMAIL_HOST_PASSWORD = "BILALAKBAR1094."
+
 # now sign in with your host gmail account in your browser
 # open following link and turn it ON
 # https://myaccount.google.com/lesssecureapps

@@ -33,7 +33,7 @@
         <h3 class="p-3">Code Output:</h3>
         <form class="form text-center" autocomplete="off" action="{% url 'save' %}" method="POST">
             <textarea readonly  class="form-control p-3" style="min-height:200px;">{{output}}</textarea>
-            <textarea readonly hidden name="output" class="form-control p-3" style="min-height:200px;">{{output}}</textarea>
+            <textarea readonly hidden name="output">{{output}}</textarea>
             <input hidden value="{{ course.id }}"  name="course_id" />
             <input type="submit" value="Save Output" class="btn btn-success">
         </form>

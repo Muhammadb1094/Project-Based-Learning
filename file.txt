@@ -1,1 +1,1 @@
-Java
+sum from lakhan function: 5
